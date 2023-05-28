@@ -8,15 +8,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.List;
-
 import com.codefountain.services.EmployeeService;
 import com.codefountain.dto.EmployeeDTO;
 import com.codefountain.entities.Employee;
 
 @RestController
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
+
 @RequestMapping("/employee")
 public class EmployeeController {
     private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeController.class);
@@ -27,7 +27,7 @@ public class EmployeeController {
     public ResponseEntity<Employee> createEmployee(@RequestBody EmployeeDTO employeeDTO) {
         Employee createdEmployee = employeeService.createEmployee(employeeDTO);
         LOGGER.info("Employee created");
-        return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdEmployee);
 
     }
 
